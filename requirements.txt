@@ -1,0 +1,30 @@
+# FastMCP - Model Context Protocol framework
+fastmcp>=2.0.0
+
+# Async HTTP client for external API calls
+httpx>=0.25.0
+
+# Image processing and base64 encoding
+Pillow>=10.0.0
+
+# Async file operations
+aiofiles>=23.0.0
+
+# Process management for PlantUML jar execution
+psutil>=5.9.0
+
+# Configuration management
+python-dotenv>=1.0.0
+
+# Logging
+loguru>=0.7.0
+
+# Type hints
+typing-extensions>=4.8.0
+
+# Development dependencies
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0

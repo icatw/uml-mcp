@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "uml-mcp-renderer": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/path/to/uml-mcp",
+        "run",
+        "python",
+        "server.py"
+      ],
+      "env": {
+        "PLANTUML_JAR_PATH": "/path/to/uml-mcp/plantuml.jar",
+        "JAVA_EXECUTABLE": "java",
+        "RENDER_TIMEOUT": "30",
+        "ENABLE_CACHE": "true",
+        "OUTPUT_DIR": "/path/to/uml-mcp/output"
+      }
+    }
+  }
+}
