@@ -16,6 +16,7 @@ from loguru import logger
 from ..config import Config
 from ..uml_renderer import UMLRenderer
 from ..metrics import RenderMetrics
+from ..plantuml_encoder import PlantUMLEncoder
 
 # 全局变量，将在register_validation_tools中初始化
 config: Config = None
@@ -261,18 +262,12 @@ async def generate_preview_url(
         
         # 编码UML文本
         if use_hex:
-            # 十六进制编码
-            encoded_text = uml_code.encode('utf-8').hex()
+            # 十六进制编码（需添加 ~h 前缀）
+            encoded_text = PlantUMLEncoder.encode_hex(uml_code)
             encoding_method = "hex"
         else:
-            # Deflate压缩编码
-            compressed = zlib.compress(uml_code.encode('utf-8'))
-            encoded_text = base64.b64encode(compressed).decode('ascii')
-            # PlantUML使用特殊的base64字符集
-            encoded_text = encoded_text.translate(str.maketrans(
-                'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
-                '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'
-            ))
+            # 正确的 Deflate 编码（去除 zlib 头尾 + 自定义字母表）
+            encoded_text = PlantUMLEncoder.encode(uml_code)
             encoding_method = "deflate"
         
         # 构建预览URL
