@@ -17,7 +17,8 @@ RUN wget -O /app/plantuml.jar https://github.com/plantuml/plantuml/releases/down
 COPY requirements.txt .
 
 # 安装Python依赖
-RUN pip install --no-cache-dir -r requirements.txt
+ENV PIP_DEFAULT_TIMEOUT=60
+RUN pip install --no-cache-dir -r requirements.txt || pip install --no-cache-dir -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 
 # 复制源代码
 COPY . .
