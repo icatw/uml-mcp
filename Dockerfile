@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 # 安装系统依赖
 RUN apt-get update && apt-get install -y \
-    openjdk-17-jre-headless \
+    default-jre-headless \
     wget \
     curl \
     && rm -rf /var/lib/apt/lists/*
@@ -27,8 +27,6 @@ RUN mkdir -p /app/temp /app/cache /app/logs
 
 # 设置环境变量
 ENV PLANTUML_JAR_PATH=/app/plantuml.jar
-ENV JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-ENV PATH="$JAVA_HOME/bin:$PATH"
 ENV PYTHONPATH=/app
 ENV UML_TEMP_DIR=/app/temp
 ENV UML_CACHE_DIR=/app/cache
